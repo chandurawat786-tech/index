@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Verification</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin: 50px;
+        }
+        .container {
+            max-width: 400px;
+            margin: auto;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 10px;
+            box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1);
+        }
+        input {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        button {
+            padding: 10px 20px;
+            background-color: #28a745;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #218838;
+        }
+        #result {
+            margin-top: 20px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Student Verification</h2>
+        <input type="text" id="studentId" placeholder="Enter Student ID">
+        <input type="text" id="studentName" placeholder="Enter Student Name">
+        <button onclick="verifyStudent()">Verify</button>
+        <div id="result"></div>
+    </div>
+
+    <script>
+        // Simulated student database (you can replace this with a real backend check)
+        const students = [
+            { id: "1001", name: "chandu", fatherName: "Raghuveer singh", grade: "A", course: "Computer Science", regNo: "CBA00001", certNo: "Cba10001" },
+            { id: "1002", name: "anand", fatherName: "amolo singh", grade: "B", course: "Mathematics", regNo: "CBA00002", certNo: "Cba10002" },
+            { id: "1003", name: "himani", fatherName: "David Johnson", grade: "A+", course: "Physics", regNo: "CBA00003", certNo: "cba10003" },
+            { id: "1004", name: "monika", fatherName: "David Johnson", grade: "A+", course: "Physics", regNo: "CBA00004", certNo: "cba10004" }
+        ];
+
+        function verifyStudent() {
+            const studentId = document.getElementById("studentId").value.trim();
+            const studentName = document.getElementById("studentName").value.trim();
+            const resultElement = document.getElementById("result");
+            
+            const student = students.find(s => s.id === studentId && s.name.toLowerCase() === studentName.toLowerCase());
+            
+            if (student) {
+                resultElement.style.color = "green";
+                resultElement.innerHTML = `
+                    <p>Verification Successful: Student Found!</p>
+                    <p><strong>Name:</strong> ${student.name}</p>
+                    <p><strong>Father's Name:</strong> ${student.fatherName}</p>
+                    <p><strong>Grade:</strong> ${student.grade}</p>
+                    <p><strong>Course:</strong> ${student.course}</p>
+                    <p><strong>Registration No:</strong> ${student.regNo}</p>
+                    <p><strong>Certificate No:</strong> ${student.certNo}</p>
+                `;
+            } else {
+                resultElement.style.color = "red";
+                resultElement.textContent = "Verification Failed: Student Not Found!";
+            }
+        }
+    </script>
+</body>
+</html>
